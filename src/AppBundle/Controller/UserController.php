@@ -90,7 +90,7 @@ class UserController extends AbstractApiController
     /**
      * @param Request $request
      * @param User    $user
-     * 
+     *
      * @return Response
      *
      * @Route("/{user}")
