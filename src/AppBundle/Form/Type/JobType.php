@@ -16,9 +16,14 @@ class JobType extends AbstractApiType
     {
         $builder
             ->add('description', null, [])
-            ->add('status', null, [])
-            ->add('user', null, [])
         ;
+
+        if ($options['method'] == 'PUT') {
+            $builder
+                ->add('status', null, [])
+                ->add('user', null, [])
+            ;
+        }
     }
 
     /**
