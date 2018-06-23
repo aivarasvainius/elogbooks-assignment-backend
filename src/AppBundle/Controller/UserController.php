@@ -86,4 +86,28 @@ class UserController extends AbstractApiController
 
         return $this->returnViewResponse($this->getErrors($form), Response::HTTP_BAD_REQUEST);
     }
+
+    /**
+     * @param Request $request
+     * @param User    $user
+     * 
+     * @return Response
+     *
+     * @Route("/{user}")
+     * @Method("PUT")
+     */
+    public function putAction(Request $request, User $user)
+    {
+        $form = $this->createForm('AppBundle\Form\Type\UserType', $user, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->returnViewResponse($user, Response::HTTP_CREATED);
+        }
+
+        return $this->returnViewResponse($this->getErrors($form), Response::HTTP_BAD_REQUEST);
+    }
 }
