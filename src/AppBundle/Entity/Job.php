@@ -56,6 +56,11 @@ class Job
      */
     protected $user;
 
+    public function __construct()
+    {
+        $this->user = null;
+    }
+
     /**
      * @return int
      */
