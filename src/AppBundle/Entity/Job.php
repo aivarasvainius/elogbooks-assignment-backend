@@ -73,4 +73,20 @@ class Job
 
         return $this;
     }
+
+    /**
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param integer $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
 }
