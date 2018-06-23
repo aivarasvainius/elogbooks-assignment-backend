@@ -48,4 +48,29 @@ class UserController extends AbstractApiController
             $filter->getSerialisationGroups()
         );
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Route("")
+     * @Method("POST")
+     */
+    public function postAction(Request $request)
+    {
+        $job = new User();
+        $form = $this->createForm('AppBundle\Form\Type\UserType', $job, ['method' => 'POST']);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($job);
+            $em->flush();
+
+            return $this->returnViewResponse($job, Response::HTTP_CREATED);
+        }
+
+        return $this->returnViewResponse($this->getErrors($form), Response::HTTP_BAD_REQUEST);
+    }
 }
