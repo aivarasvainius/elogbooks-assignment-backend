@@ -15,6 +15,19 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends AbstractApiController
 {
     /**
+     * @param User $user
+     *
+     * @return Response
+     *
+     * @Route("/{id}")
+     * @Method("GET")
+     */
+    public function getAction(User $user)
+    {
+        return $this->returnViewResponse($user);
+    }
+
+    /**
      * @param Request $request
      *
      * @return Response
