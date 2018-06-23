@@ -47,6 +47,16 @@ class Job
     protected $status = self::STATUS_OPEN;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"default", "list"})
+     */
+    protected $user;
+
+    /**
      * @return int
      */
     public function getId()
@@ -84,9 +94,34 @@ class Job
 
     /**
      * @param integer $status
+     *
+     * @return self
      */
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
     }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return self
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 }
