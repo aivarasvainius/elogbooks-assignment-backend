@@ -72,16 +72,16 @@ class UserController extends AbstractApiController
      */
     public function postAction(Request $request)
     {
-        $job = new User();
-        $form = $this->createForm('AppBundle\Form\Type\UserType', $job, ['method' => 'POST']);
+        $user = new User();
+        $form = $this->createForm('AppBundle\Form\Type\UserType', $user, ['method' => 'POST']);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($job);
+            $em->persist($user);
             $em->flush();
 
-            return $this->returnViewResponse($job, Response::HTTP_CREATED);
+            return $this->returnViewResponse($user, Response::HTTP_CREATED);
         }
 
         return $this->returnViewResponse($this->getErrors($form), Response::HTTP_BAD_REQUEST);
